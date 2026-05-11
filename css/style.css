@@ -1,0 +1,144 @@
+/* Reset */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #2c2c2c;
+    background: #fafafa;
+}
+
+.container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Header */
+header {
+    padding: 80px 0 60px;
+    text-align: center;
+}
+
+.site-title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.site-title a {
+    color: #2c2c2c;
+    text-decoration: none;
+}
+
+.site-desc {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #999;
+}
+
+nav {
+    margin-top: 32px;
+}
+
+nav a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin: 0 12px;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #2c2c2c;
+}
+
+/* Posts */
+.post {
+    margin-bottom: 48px;
+}
+
+.post-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.post-title a {
+    color: #2c2c2c;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.post-title a:hover {
+    color: #e74c3c;
+}
+
+.post-date {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.post-summary {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+/* Post Content */
+.post-content {
+    margin-top: 48px;
+}
+
+.post-content h1 {
+    font-size: 1.75rem;
+    margin-bottom: 16px;
+}
+
+.post-content p {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.post-content blockquote {
+    margin: 24px 0;
+    padding-left: 20px;
+    border-left: 3px solid #e74c3c;
+    color: #666;
+    font-style: italic;
+}
+
+/* About */
+.about-content {
+    margin-top: 48px;
+}
+
+.about-content p {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+/* Footer */
+footer {
+    padding: 48px 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #bbb;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    header {
+        padding: 48px 0 40px;
+    }
+    .site-title {
+        font-size: 1.5rem;
+    }
+}
