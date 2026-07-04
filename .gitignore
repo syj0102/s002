@@ -1,0 +1,4 @@
+node_modules/
+.DS_Store
+.env
+library/skills/*/metadata.local.json
