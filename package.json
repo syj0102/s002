@@ -1,0 +1,19 @@
+{
+  "name": "agent-skills-manager",
+  "version": "0.1.0",
+  "description": "Local Agent skills scanner and manager",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "agent",
+    "skills",
+    "manager",
+    "scanner",
+    "mcp"
+  ],
+  "license": "MIT"
+}
