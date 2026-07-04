@@ -1,109 +1,208 @@
-# AI Skills Hub
+# Agent Skills Manager
 
-中文名：AI 技能中控台
+中文名：Agent 技能管理器
 
-这个仓库是给多个 AI Agent 共用技能用的。
+这个项目的核心不是「我自己写一堆技能」。
 
-它的目标不是再造一个聊天机器人，而是解决一个很烦的问题：
+它真正要做的是：
 
-> 写作 Agent、选题 Agent、图片 Agent、检查 Agent 都要用同一套技能，但每个 Agent 文件夹下面都复制一份，最后越改越乱。
+> 安装以后，扫描本地已经存在的各类 Agent 技能目录，把分散的 skills 统一显示、统一管理、统一安装、统一同步。
 
-所以这个项目的核心思路是：
+## 要解决的问题
 
-> 技能只放一份，Agent 按需读取。
+现在很多 AI 工具都有自己的技能目录。
 
-## 这个项目要解决什么
-
-以前的做法：
+比如：
 
 ```text
-agent-writing/skills/公众号写作.md
-agent-topic/skills/公众号写作.md
-agent-image/skills/公众号写作.md
-agent-check/skills/公众号写作.md
+Claude Code 有自己的 skills
+Cursor 有自己的 skills
+Codex / .agents 有自己的 skills
+Windsurf 有自己的 skills
+项目目录下面也可能有自己的 skills
 ```
 
-问题是：
+结果就是：
 
 ```text
-改一次，要改很多处
-哪个版本最新，不知道
-技能越来越多，目录越来越乱
-Agent 多了以后，不是在变强，而是在变脏
+同一个技能到处复制
+每个 Agent 下面都有一份
+改完不知道同步到哪里了
+旧版本、新版本混在一起
+想查本地到底有多少技能，也看不清
 ```
 
-现在的做法：
+这个项目要做的不是再造技能，而是做一个本地技能管理器。
+
+## 核心功能
+
+### 1. 扫描本地技能
+
+自动扫描常见路径：
 
 ```text
-AI-Skills-Hub/
-  skills/
-    common-writing/
-    topic-selection/
-    cover-prompt/
-    reclaim-control-analyst/
-  contexts/
-    reverse-life-hub.md
-  workflows/
-    article-production.md
+~/.claude/skills/
+~/.cursor/skills/
+~/.agents/skills/
+~/.copilot/skills/
+~/.codeium/windsurf/skills/
+当前项目/.claude/skills/
+当前项目/.cursor/skills/
+当前项目/.agents/skills/
 ```
 
-Agent 不再自己保存一堆重复技能，而是从这个中央仓库读取。
-
-## 当前定位
-
-这个仓库会先做成「反向生活家」自己的 AI 技能库。
-
-第一阶段不急着做完整 Web UI，先把技能整理成统一结构。
-
-第二阶段再考虑接入类似 `One-Man-Company/Skills-ContextManager` 的 Web UI 和 MCP 方式，让技能可以开关、分组、按需加载。
-
-## 初始技能
-
-| 技能 | 用途 |
-|---|---|
-| `common-writing` | 公众号文章基础写作规范 |
-| `topic-selection` | 选题判断，判断一个话题值不值得写 |
-| `cover-prompt` | 公众号封面图提示词生成 |
-| `reclaim-control-analyst` | 「重获控制权」项目案例分析 |
-
-## 推荐用法
-
-在任何 Agent 的系统提示词里，不要复制完整技能，只写：
+识别里面的：
 
 ```text
-执行任务前，优先读取本仓库对应的 SKILL.md。
-不要复制技能内容到当前 Agent。
-技能更新以本仓库为准。
+SKILL.md
+Skill.md
+README.md
+.agent.md
+其他 markdown 技能文件
 ```
 
-比如写公众号文章时：
+### 2. 统一展示
+
+Web UI 里显示：
 
 ```text
-读取 skills/common-writing/SKILL.md，再根据用户素材写文章。
+技能名称
+技能来源
+所属 Agent
+所在路径
+最后修改时间
+是否重复
+是否可安装
+是否已启用
 ```
 
-做选题判断时：
+### 3. 去重和版本判断
+
+发现多个 Agent 下面有同名技能时，提示：
 
 ```text
-读取 skills/topic-selection/SKILL.md，先判断这个选题能不能回答一个好问题。
+这个技能在 4 个地方存在
+哪个是最新的
+哪些内容不同
+是否合并
+是否只保留中央版本
 ```
 
-## 后续计划
+### 4. 安装到指定 Agent
 
-- [ ] 补齐写作技能
-- [ ] 补齐选题技能
-- [ ] 补齐封面图技能
-- [ ] 补齐新闻核查技能
-- [ ] 补齐「重获控制权」案例分析技能
-- [ ] 接入 MCP
-- [ ] 接入 Web UI
-- [ ] 支持技能开关和分组
-- [ ] 支持多个 Agent 共用同一套技能
+从中央技能库选择一个技能，一键安装到：
 
-## 来源说明
+```text
+Claude Code
+Cursor
+Codex / .agents
+Windsurf
+GitHub Copilot
+指定项目目录
+```
 
-本项目的方向参考了 `One-Man-Company/Skills-ContextManager` 的思路：用 Web UI 和 MCP 统一管理 AI skills、workflows、contexts。
+优先使用软链接 symlink。
 
-当前仓库不是原项目的完整复制版，而是面向「反向生活家」内容创作和个人项目的中文化改造起步版。
+如果 Windows 权限不允许软链接，再退回复制。
 
-如果后续直接引入原项目代码，需要保留原项目 MIT License 和版权说明。
+### 5. 中央技能库
+
+扫描到的技能可以导入中央库：
+
+```text
+library/skills/
+```
+
+后续所有 Agent 尽量从中央库安装，避免重复复制。
+
+### 6. Web UI
+
+需要一个本地 Web 页面：
+
+```text
+http://localhost:3000
+```
+
+页面至少有：
+
+```text
+技能列表
+扫描按钮
+重复技能提醒
+安装到 Agent
+从 Agent 导入
+查看技能内容
+编辑技能内容
+```
+
+### 7. MCP 接入
+
+后续通过 MCP 给 Agent 提供能力：
+
+```text
+list_skills()
+load_skill(name)
+install_skill(name, target_agent)
+scan_local_skills()
+```
+
+这样 Agent 自己也能知道本地有哪些技能。
+
+## 不是做什么
+
+这个项目不是：
+
+```text
+不是单纯的技能库
+不是公众号写作技能合集
+不是提示词收藏夹
+不是给每个 Agent 再复制一份技能
+```
+
+它是：
+
+```text
+本地 Agent 技能扫描器
+本地 Agent 技能管理器
+多 Agent 技能安装器
+重复技能清理工具
+```
+
+## 第一阶段目标
+
+先做最小可用版：
+
+```text
+1. 扫描本地常见 skills 路径
+2. 在 Web UI 显示技能列表
+3. 标记重复技能
+4. 可以把某个技能导入中央库
+5. 可以把中央库技能安装到指定 Agent
+```
+
+## 参考项目
+
+方向参考：
+
+```text
+One-Man-Company/Skills-ContextManager
+ai-agent-manager/agent-manager
+```
+
+但本项目重点更明确：
+
+> 先扫描和管理本机已有 Agent 技能，再谈技能创作和 MCP 动态加载。
+
+## 项目状态
+
+当前是需求定义阶段。
+
+下一步要做：
+
+```text
+docs/scan-design.md       扫描规则
+src/scanner/              本地扫描模块
+src/library/              中央技能库模块
+src/installers/           安装到各 Agent 的模块
+web/                      本地 Web UI
+```
