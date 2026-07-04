@@ -8,6 +8,59 @@
 
 > 管理本地多个 AI Agent 已经存在的 skills，把分散、重复、版本混乱的技能统一扫描、展示、整理、导入和安装。
 
+## 当前状态
+
+现在已经有一个最小可运行版 MVP。
+
+能做：
+
+```text
+扫描本地常见 Agent skills 目录
+在本地 Web UI 展示技能列表
+标记同名重复和完全重复
+把扫描到的技能导入中央库 library/skills/
+把中央库技能安装到指定 Agent skills 目录
+优先 symlink，失败后复制
+```
+
+还没做：
+
+```text
+MCP 接入
+差异对比视图
+自动清理旧副本
+GitHub / Skills.sh 导入
+复杂设置页
+打包成 exe
+```
+
+## 快速开始
+
+要求：电脑已安装 Node.js。
+
+```bash
+npm install
+npm start
+```
+
+打开：
+
+```text
+http://localhost:3000
+```
+
+使用步骤：
+
+```text
+1. 打开页面
+2. 检查扫描路径，一行一个路径
+3. 点击「开始扫描」
+4. 查看重复技能提醒
+5. 选择技能「导入中央库」
+6. 在中央库里填写目标 skills 目录
+7. 点击「安装」
+```
+
 ## 先说清楚：参考项目已有功能和本项目计划功能不是一回事
 
 本项目参考了 `One-Man-Company/Skills-ContextManager`，但不会把参考项目已经有的功能和我们准备增强的功能混在一起说。
@@ -29,9 +82,9 @@
 
 > 把技能放进一个管理界面里，再通过 MCP 给 Agent 调用。
 
-### 本项目准备重点增强的能力
+### 本项目重点增强的能力
 
-本项目要更偏「本机扫描和多 Agent 技能管理」。
+本项目更偏「本机扫描和多 Agent 技能管理」。
 
 重点是：
 
@@ -257,7 +310,7 @@ install_skill(name, target_agent)
 重复技能清理工具
 ```
 
-## 项目结构规划
+## 项目结构
 
 ```text
 docs/
@@ -265,13 +318,15 @@ docs/
   reference-comparison.md      参考项目和本项目差异
 
 src/
-  scanner/                    扫描本地 skills
-  library/                    中央技能库
-  installers/                 安装到各 Agent
-  dedupe/                     重复检测
+  scanner.js                  扫描本地 skills
+  library.js                  中央技能库
+  installer.js                安装到各 Agent
+  file-utils.js               文件工具
 
-web/
-  本地 Web UI
+public/
+  index.html                  本地 Web UI
+  app.js                      页面逻辑
+  style.css                   页面样式
 
 library/
   skills/                     中央技能库目录
@@ -287,9 +342,3 @@ ai-agent-manager/agent-manager
 一句话定位：
 
 > 参考项目偏「技能导入、开关、MCP 动态加载」，本项目偏「扫描本机已有 Agent 技能、去重、归档、安装」。
-
-## 当前状态
-
-需求定义阶段。
-
-下一步先做扫描模块，不急着堆技能内容。
