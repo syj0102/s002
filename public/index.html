@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent 技能管理器</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Agent Skills Manager</p>
+        <h1>本地 Agent 技能管理器</h1>
+        <p class="subtitle">扫描 Claude、Cursor、.agents、Windsurf 等本地 skills 目录，找出重复技能，导入中央库，再安装到指定 Agent。</p>
+      </div>
+      <button id="scanBtn">开始扫描</button>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>扫描路径</h2>
+        <button id="resetRootsBtn" class="secondary">恢复默认</button>
+      </div>
+      <textarea id="rootsInput" rows="7" spellcheck="false"></textarea>
+      <p class="hint">一行一个路径。可以加自己的技能目录，比如 C:\\Users\\Administrator\\.qclaw\\workspace。</p>
+    </section>
+
+    <section class="stats" id="stats"></section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>扫描结果</h2>
+        <input id="filterInput" placeholder="搜索技能名 / Agent / 路径">
+      </div>
+      <div id="skillsList" class="list empty">还没扫描。</div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <h2>中央库</h2>
+        <button id="refreshLibraryBtn" class="secondary">刷新</button>
+      </div>
+      <div id="libraryList" class="list empty">暂无中央库技能。</div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
