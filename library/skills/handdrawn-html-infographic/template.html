@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>手绘知识循环</title>
+  <style>
+    :root{
+      --paper:#f8f1df;
+      --ink:#1f2937;
+      --blue:#2563eb;
+      --green:#16a34a;
+      --yellow:#facc15;
+      --orange:#f97316;
+      --red:#dc2626;
+      --line:#2f2f2f;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:#e9e1cd;
+      color:var(--ink);
+      font-family:"Microsoft YaHei","PingFang SC",sans-serif;
+      line-height:1.75;
+    }
+    .sheet{
+      width:min(1080px,96vw);
+      margin:20px auto;
+      padding:28px;
+      background:
+        radial-gradient(circle at 10% 20%,rgba(0,0,0,.025),transparent 25%),
+        radial-gradient(circle at 90% 80%,rgba(0,0,0,.02),transparent 30%),
+        var(--paper);
+      border:2px solid var(--line);
+      box-shadow:8px 10px 0 rgba(0,0,0,.16);
+    }
+    h1,h2,h3{
+      font-family:KaiTi,STKaiti,"Noto Serif SC",serif;
+      margin:0;
+    }
+    h1{font-size:clamp(32px,6vw,64px);line-height:1.15}
+    h2{font-size:clamp(24px,4vw,38px);color:var(--blue)}
+    h3{font-size:22px}
+    .underline{
+      display:inline-block;
+      position:relative;
+      z-index:1;
+    }
+    .underline:after{
+      content:"";
+      position:absolute;
+      left:0;right:0;bottom:.05em;
+      height:.18em;
+      background:var(--red);
+      transform:rotate(-1deg);
+      z-index:-1;
+      opacity:.8;
+    }
+    .lead{font-size:18px;margin:18px 0 24px}
+    .grid{display:grid;gap:18px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .card{
+      background:rgba(255,255,255,.45);
+      border:2px solid var(--line);
+      border-radius:14px 10px 16px 11px;
+      padding:18px;
+      box-shadow:3px 4px 0 rgba(0,0,0,.1);
+    }
+    .card:nth-child(odd){transform:rotate(-.3deg)}
+    .card:nth-child(even){transform:rotate(.25deg)}
+    .flow{display:grid;grid-template-columns:repeat(7,auto);align-items:center;gap:8px}
+    .step{
+      min-height:135px;
+      padding:14px;
+      border:2px solid var(--line);
+      background:#fffaf0;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      border-radius:10px;
+    }
+    .step strong{font-size:20px;font-family:KaiTi,serif}
+    .arrow{font-size:30px;font-weight:700}
+    .warn{border-left:10px solid var(--yellow);background:#fff9c9}
+    .danger{border-left:10px solid var(--red);background:#ffe3e3}
+    .note{border:2px dashed var(--line);background:#fff;padding:16px}
+    .tag{display:inline-block;padding:2px 10px;border:2px solid currentColor;border-radius:999px;font-weight:700}
+    ul,ol{padding-left:1.4em;margin:10px 0}
+    code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+    pre{white-space:pre-wrap;background:#fff;border:2px solid var(--line);padding:14px;overflow:auto}
+    .footer-tip{font-size:20px;font-weight:700;text-align:center;margin-top:22px}
+    @media(max-width:760px){
+      .sheet{padding:18px;margin:8px auto;box-shadow:4px 5px 0 rgba(0,0,0,.14)}
+      .grid-2,.grid-4{grid-template-columns:1fr}
+      .flow{grid-template-columns:1fr}
+      .arrow{transform:rotate(90deg);text-align:center}
+      .step{min-height:auto}
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <h1><span class="underline">为什么需要循环</span><br>而不是聊天标签页</h1>
+    <p class="lead">把这里替换成原文的核心说明。中文必须使用真实 HTML 文本，不能生成到图片里。</p>
+
+    <section class="card">
+      <h2>循环的四个部分</h2>
+      <div class="flow">
+        <div class="step"><strong>TRIGGER</strong><span>时间表或新笔记保存</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><strong>DO</strong><span>读取知识库并完成工作</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><strong>VERIFY</strong><span>对照硬规则检查</span></div>
+        <div class="arrow">→</div>
+        <div class="step"><strong>STOP</strong><span>通过或达到重试上限</span></div>
+      </div>
+    </section>
+
+    <div class="grid grid-2" style="margin-top:18px">
+      <section class="card warn">
+        <h3>跳过 VERIFY</h3>
+        <p>模型会给自己的作业打高分，却没有真正验证结果。</p>
+      </section>
+      <section class="card danger">
+        <h3>跳过 STOP</h3>
+        <p>任务可能持续运行，悄悄增加 API 费用。</p>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:18px">
+      <h2>模块一</h2>
+      <ol>
+        <li>读取原始材料</li>
+        <li>提取决定、推理和后续结果</li>
+        <li>一条笔记只保留一个想法</li>
+        <li>发现重复主题时更新旧笔记</li>
+      </ol>
+      <div class="note">在这里放 VERIFY 和 STOP 条件。</div>
+    </section>
+
+    <section class="card" style="margin-top:18px">
+      <h2>模块二</h2>
+      <div class="grid grid-4">
+        <div class="note"><span class="tag" style="color:var(--green)">轮次 1</span><p>搁置线索</p></div>
+        <div class="note"><span class="tag" style="color:var(--blue)">轮次 2</span><p>什么有效</p></div>
+        <div class="note"><span class="tag" style="color:var(--orange)">轮次 3</span><p>诚实审视</p></div>
+        <div class="note"><span class="tag" style="color:var(--red)">轮次 4</span><p>隐藏重复</p></div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:18px">
+      <h2>真正可行的顺序</h2>
+      <ol>
+        <li>先手动运行</li>
+        <li>再拆成两个循环</li>
+        <li>先加 VERIFY 和 STOP</li>
+        <li>最后才安排自动运行</li>
+      </ol>
+    </section>
+
+    <p class="footer-tip">先让手动版本可靠，再让自动化替你长期重读。</p>
+  </main>
+</body>
+</html>
