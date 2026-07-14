@@ -1,0 +1,17 @@
+{
+  "name": "handdrawn-html-infographic",
+  "displayName": "Handdrawn HTML Infographic",
+  "version": "1.0.0",
+  "description": "将长文章和流程说明转换为手机可浏览、中文不乱码的手绘风单文件 HTML 信息图。",
+  "entry": "SKILL.md",
+  "template": "template.html",
+  "language": "zh-CN",
+  "tags": [
+    "html",
+    "infographic",
+    "hand-drawn",
+    "mobile",
+    "chinese"
+  ],
+  "license": "CC-BY-4.0"
+}
